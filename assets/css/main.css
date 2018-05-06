@@ -8,3 +8,7 @@ form {
 #about {
     width: 70%;
 }
+.barcode {
+    width: 200px;
+    height: 60px;
+}

@@ -23,7 +23,7 @@
     
 
 
-    <form>
+    <form onsubmit="return false">
         <p class="h4 text mb-4">Product Level Generator</p>
     
         <!-- Default input email -->
@@ -37,11 +37,16 @@
         <input type="number" id="totallevels" class="form-control" required>
     
         <div class="mt-4">
-            <button class="btn btn-default" type="button">Generate Levels</button>
+            <button class="btn btn-default" type="submit" id="submitData" >Generate Levels</button>
         </div>
     </form>
 
     <br><br><br>
+    <div id="barcode-wrapper"></div>
+    <canvas id="hidden-barcode"></canvas>
+    <br><br><br>
+
+    
     <p id="about">
         In case you are wondering, what this tool even does? well, I got an answer for you. This is a tool for generating price tags(<em>stickers, to be more clear</em>) with a Bar Code containing all information in it. <br>
         <strong>Too basic</strong>, ehh? No! Not really. We will modify it further. Have an eye on our <a href="#">Github Repository</a> if you too want to use it for your business. <br>
@@ -50,6 +55,10 @@
 
 
 
+
+
+    <!-- BARCODE GENERATOR-->
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
     
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -60,6 +69,10 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
             
+
+
+    <!-- Custom JS-->
+    <script src="./assets/js/script.js"></script>
 
 
 </body>
