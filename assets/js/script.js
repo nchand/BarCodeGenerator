@@ -17,12 +17,13 @@ let barcodePrice = document.getElementsByClassName('barcodePrice');
 
 const generateBarcode = () => {
     wrapper.innerHTML = "";
+    let price = Number(productPrice.value); 
     for (let i=0; i<productCount.value; i++) {
         priceImgWrapper.appendChild(span);
         priceImgWrapper.appendChild(img)
         span = document.createElement('span'); 
         wrapper.appendChild(priceImgWrapper);
-        barcodePrice[i].innerHTML=productPrice.value; 
+        barcodePrice[i].innerHTML="Rs."+price.toFixed(2); 
         img = document.createElement('img');
         priceImgWrapper = document.createElement('div')
         img.setAttribute('class', 'barcode');
@@ -36,9 +37,21 @@ const generateBarcode = () => {
 }
 
 submitbButton.addEventListener('click', () => {
-    generateBarcode();
+   
+    let fields = ["Product Code", "Product Price", "Sticker Quantity"]
+    let i, l = fields.length;
+    let fieldname;
+    for (i = 0; i < l; i++) {
+        fieldname = fields[i];
+        if (document.forms["inputForm"][fieldname].value === "") {
+        alert(fieldname + " can not be empty");
+        return false;
+        }
+    }
+    if(document.forms["inputForm"]["Sticker Quantity"].value > 50)
+        alert("Stikcer Quantity can't exceed 50 no's")
+        else
+        generateBarcode();
+    
 })
 
-
-// basically what I did is, I created another div element 'priceImgWrapper' and append span and img to it. Than, finally I append 'priceImgWrapper' to original 'wrapper'
-// I positioned everything with CSS flex box. You can see those changes in CSS file.

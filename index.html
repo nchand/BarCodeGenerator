@@ -23,27 +23,27 @@
     
 
 
-    <form onsubmit="return false">
+    <form name="inputForm" onsubmit="return false">
         <p class="h4 text mb-4">Product Level Generator</p>
     
         <!-- Default input product code  -->
-        <label for="dataString" class="grey-text">Enter You Product's Code Here <span style="color: red">*</span></label>
-        <input type="text" id="dataString" class="form-control" required>
+        <label for="dataString" class="grey-text">Enter Your Product's Code Here <span style="color: red">*</span></label>
+        <input type="text" id="dataString" name="Product Code" class="form-control" required>
 
     
         <br>
 
         <!-- Default input product price  -->
         <label for="productPrice" class="grey-text">Enter Product Price <span style="color: red">*</span></label>
-        <input type="text" id="productPrice" class="form-control" required>
+        <input type="text" id="productPrice" name="Product Price" class="form-control" required>
         <br>
 
         <!-- Default input no:of stickers -->
-        <label for="totallevels" class="grey-text">Number of Levels You want to Print <span style="color: red">*</span></label>
-        <input type="number" id="totallevels" class="form-control" required>
+        <label for="totallevels" class="grey-text">Number Of Stickers You Want To Print <span style="color: red">*</span></label>
+        <input type="number" id="totallevels" name="Sticker Quantity" class="form-control" min="1" max="50" required>
     
         <div class="mt-4">
-            <button class="btn btn-default" type="submit" id="submitData" >Generate Levels</button>
+            <button class="btn btn-default" type="submit" id="submitData" >Generate</button>
         </div>
     </form>
 
@@ -54,8 +54,8 @@
 
     
     <p id="about">
-        In case you are wondering, what this tool even does? well, I got an answer for you. This is a tool for generating price tags(<em>stickers, to be more clear</em>) with a Bar Code containing all information in it. <br>
-        <strong>Too basic</strong>, ehh? No! Not really. We will modify it further. Have an eye on our <a href="#">Github Repository</a> if you too want to use it for your business. <br>
+        In case if you are wondering, what this tool does? Well, I got an answer for you. This is a tool for generating price tags(<em>stickers, to be more clear</em>) with a Bar Code containing all information in it. <br>
+        <strong>Too basic</strong>, ehh? No! Not really. We will modify it further. Have an eye on our <a href="https://goo.gl/GD3mkb">Github Repository</a> if you would like to use it for your business. <br>
         <strong>Pricing?</strong> Again a NO! It's totally free to use. However, we do care for an attribution. It really helps us grow! 
     </p>
 
