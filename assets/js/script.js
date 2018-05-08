@@ -53,7 +53,7 @@ submitbButton.addEventListener('click', () => {
 
         setTimeout(() => {
             document.getElementById('error-message').style.display = "none";
-        }, 3000);
+        }, 6000);
 
         return false;
         }
@@ -80,7 +80,7 @@ submitbButton.addEventListener('click', () => {
 
         setTimeout(() => {
             document.getElementById('nan-error').style.display = "none";
-        }, 3000);
+        }, 6000);
 
     } else {
         generateBarcode();
