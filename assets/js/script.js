@@ -47,16 +47,29 @@ submitbButton.addEventListener('click', () => {
     for (i = 0; i < l; i++) {
         fieldname = fields[i];
         if (document.forms["inputForm"][fieldname].value === "") {
-        alert(fieldname + " can not be empty");
+        // alert(fieldname + " can not be empty");
+        document.getElementById('error-message').innerHTML = fieldname + " can not be empty";
+        document.getElementById('error-message').style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById('error-message').style.display = "none";
+        }, 3000);
+
         return false;
         }
         
     }   
-        if (isNaN(x)) 
-        alert("Product Price must be a number");    
-        if(document.forms["inputForm"]["Sticker Quantity"].value > 50)
-        alert("Sticker Quantity can't exceed 50 no's")
-        else
+    if (isNaN(x)) 
+    alert("Product Price must be a number");    
+    if(document.forms["inputForm"]["Sticker Quantity"].value > 50){
+        // alert("Sticker Quantity can't exceed 50 no's")
+        document.getElementById('nan-error').style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById('nan-error').style.display = "none";
+        }, 3000);
+
+    } else {
         generateBarcode();
     }
 })
