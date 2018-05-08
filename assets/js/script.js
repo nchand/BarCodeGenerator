@@ -36,6 +36,7 @@ const generateBarcode = () => {
 
 }
 
+
 submitbButton.addEventListener('click', () => {
    
     let fields = ["Product Code", "Product Price", "Sticker Quantity"]
@@ -57,6 +58,6 @@ submitbButton.addEventListener('click', () => {
         alert("Sticker Quantity can't exceed 50 no's")
         else
         generateBarcode();
-    
+    }
 })
 
