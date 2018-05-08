@@ -8,7 +8,17 @@ form {
 #about {
     width: 70%;
 }
+#barcode-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    text-align: center;
+}
 .barcode {
     width: 200px;
     height: 60px;
+}
+.priceImgWrapper {
+    display: flex;
+    flex-direction: column;
 }
