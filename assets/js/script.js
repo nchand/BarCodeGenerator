@@ -43,11 +43,11 @@ submitbButton.addEventListener('click', () => {
     let i, l = fields.length;
     let fieldname;
     let x=document.forms["inputForm"]["Product Price"].value;
+    let y=document.forms["inputForm"]["Sticker Quantity"].value;
     
     for (i = 0; i < l; i++) {
         fieldname = fields[i];
         if (document.forms["inputForm"][fieldname].value === "") {
-        // alert(fieldname + " can not be empty");
         document.getElementById('error-message').innerHTML = fieldname + " can not be empty";
         document.getElementById('error-message').style.display = "block";
 
@@ -59,10 +59,23 @@ submitbButton.addEventListener('click', () => {
         }
         
     }   
-    if (isNaN(x)) 
-    alert("Product Price must be a number");    
+    if (isNaN(x)) { 
+        document.getElementById('error-message').innerHTML = "Product Price must be a number";
+        document.getElementById('error-message').style.display = "block";
+        setTimeout(() => {
+        document.getElementById('error-message').style.display = "none";
+            }, 3000);
+        return false;
+        } 
+    if (isNaN(y)) { 
+        document.getElementById('error-message').innerHTML = "Sticker Quantity must be a number";
+        document.getElementById('error-message').style.display = "block";
+        setTimeout(() => {
+            document.getElementById('error-message').style.display = "none";
+             }, 3000);
+        return false;
+        } 
     if(document.forms["inputForm"]["Sticker Quantity"].value > 50){
-        // alert("Sticker Quantity can't exceed 50 no's")
         document.getElementById('nan-error').style.display = "block";
 
         setTimeout(() => {
