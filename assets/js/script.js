@@ -41,15 +41,20 @@ submitbButton.addEventListener('click', () => {
     let fields = ["Product Code", "Product Price", "Sticker Quantity"]
     let i, l = fields.length;
     let fieldname;
+    let x=document.forms["inputForm"]["Product Price"].value;
+    
     for (i = 0; i < l; i++) {
         fieldname = fields[i];
         if (document.forms["inputForm"][fieldname].value === "") {
         alert(fieldname + " can not be empty");
         return false;
         }
-    }
-    if(document.forms["inputForm"]["Sticker Quantity"].value > 50)
-        alert("Stikcer Quantity can't exceed 50 no's")
+        
+    }   
+        if (isNaN(x)) 
+        alert("Product Price must be a number");    
+        if(document.forms["inputForm"]["Sticker Quantity"].value > 50)
+        alert("Sticker Quantity can't exceed 50 no's")
         else
         generateBarcode();
     
