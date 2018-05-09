@@ -51,9 +51,9 @@ submitbButton.addEventListener('click', () => {
             document.getElementById('error-message').innerHTML = fieldname + " can not be empty";
             document.getElementById('error-message').style.display = "block";
 
-            setTimeout(() => {
-                document.getElementById('error-message').style.display = "none";
-            }, 3000);
+        setTimeout(() => {
+            document.getElementById('error-message').style.display = "none";
+        }, 3000);
 
             return false;
         }
@@ -80,7 +80,7 @@ submitbButton.addEventListener('click', () => {
 
         setTimeout(() => {
             document.getElementById('nan-error').style.display = "none";
-        }, 3000);
+        }, 6000);
 
     } else {
         generateBarcode();
