@@ -17,19 +17,19 @@ let barcodePrice = document.getElementsByClassName('barcodePrice');
 
 const generateBarcode = () => {
     wrapper.innerHTML = "";
-    let price = Number(productPrice.value); 
-    for (let i=0; i<productCount.value; i++) {
+    let price = Number(productPrice.value);
+    for (let i = 0; i < productCount.value; i++) {
         priceImgWrapper.appendChild(span);
         priceImgWrapper.appendChild(img)
-        span = document.createElement('span'); 
+        span = document.createElement('span');
         wrapper.appendChild(priceImgWrapper);
-        barcodePrice[i].innerHTML="Rs."+price.toFixed(2); 
+        barcodePrice[i].innerHTML = "Rs." + price.toFixed(2);
         img = document.createElement('img');
         priceImgWrapper = document.createElement('div')
         img.setAttribute('class', 'barcode');
         span.setAttribute('class', 'barcodePrice');
         priceImgWrapper.setAttribute('class', 'priceImgWrapper');
-    } 
+    }
     JsBarcode(".barcode", productDataString.value);
     console.log(productDataString.value)
     console.log(productPrice.value)
@@ -38,44 +38,44 @@ const generateBarcode = () => {
 
 
 submitbButton.addEventListener('click', () => {
-   
+
     let fields = ["Product Code", "Product Price", "Sticker Quantity"]
     let i, l = fields.length;
     let fieldname;
-    let x=document.forms["inputForm"]["Product Price"].value;
-    let y=document.forms["inputForm"]["Sticker Quantity"].value;
-    
+    let x = document.forms["inputForm"]["Product Price"].value;
+    let y = document.forms["inputForm"]["Sticker Quantity"].value;
+
     for (i = 0; i < l; i++) {
         fieldname = fields[i];
         if (document.forms["inputForm"][fieldname].value === "") {
-        document.getElementById('error-message').innerHTML = fieldname + " can not be empty";
-        document.getElementById('error-message').style.display = "block";
+            document.getElementById('error-message').innerHTML = fieldname + " can not be empty";
+            document.getElementById('error-message').style.display = "block";
 
-        setTimeout(() => {
-            document.getElementById('error-message').style.display = "none";
-        }, 3000);
+            setTimeout(() => {
+                document.getElementById('error-message').style.display = "none";
+            }, 3000);
 
-        return false;
+            return false;
         }
-        
-    }   
-    if (isNaN(x)) { 
+
+    }
+    if (isNaN(x)) {
         document.getElementById('error-message').innerHTML = "Product Price must be a number";
         document.getElementById('error-message').style.display = "block";
         setTimeout(() => {
-        document.getElementById('error-message').style.display = "none";
-            }, 3000);
+            document.getElementById('error-message').style.display = "none";
+        }, 3000);
         return false;
-        } 
-    if (isNaN(y)) { 
+    }
+    if (isNaN(y)) {
         document.getElementById('error-message').innerHTML = "Sticker Quantity must be a number";
         document.getElementById('error-message').style.display = "block";
         setTimeout(() => {
             document.getElementById('error-message').style.display = "none";
-             }, 3000);
+        }, 3000);
         return false;
-        } 
-    if(document.forms["inputForm"]["Sticker Quantity"].value > 50){
+    }
+    if (document.forms["inputForm"]["Sticker Quantity"].value > 50) {
         document.getElementById('nan-error').style.display = "block";
 
         setTimeout(() => {
