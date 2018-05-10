@@ -14,6 +14,7 @@ img.setAttribute('class', 'barcode');
 span.setAttribute('class', 'barcodePrice');
 priceImgWrapper.setAttribute('class', 'priceImgWrapper');
 let barcodePrice = document.getElementsByClassName('barcodePrice');
+let genButton = document.getElementById('gen');
 
 const generateBarcode = () => {
     wrapper.innerHTML = "";
@@ -35,6 +36,7 @@ const generateBarcode = () => {
     console.log(productPrice.value)
 
 }
+
 
 
 submitbButton.addEventListener('click', () => {
@@ -84,6 +86,40 @@ submitbButton.addEventListener('click', () => {
 
     } else {
         generateBarcode();
+        
+        //URL METHOD ..
+    //     var imgData = document.getElementsByClassName("barcode-wrapper");
+    //     console.log(imgData);
+    //     var doc = new jsPDF()
+    //     doc.setFontSize(40)
+    //     doc.addImage(imgData, 'JPEG', 15, 40, 180, 160)
+    //    doc.save('test.pdf')
+    
+        //JsPdf Method..
+    var pdf = new jsPDF("p", "pt", "a4");
+	pdf.addHTML($('#barcode-wrapper'), 15, 15, function() {
+        pdf.setTextColor(0, 255, 0);
+	  pdf.save('div.pdf');
+    });
+    
+
+        //JQuery Method..
+    // $("#submitData").on("click", function () {
+    //     var divContents = $("#barcode-wrapper").html();
+    //     var printWindow = window.open('', '', 'height=400,width=800');
+    //     printWindow.document.write('<html><head><title>DIV Contents</title>');
+    //     printWindow.document.write('</head><body >');
+    //     printWindow.document.write(divContents);
+    //     printWindow.document.write('</body></html>');
+    //     printWindow.document.close();
+    //     printWindow.print();
+    // });
+
     }
+    
 })
+
+
+
+
 
