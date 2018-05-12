@@ -27,4 +27,4 @@ Bug reports should always be done with a [new issue](https://github.com/nchand/B
 
 ## License
 
-BarCodeGenerator is shared under the [MIT license](https://github.com/nchand/BarCodeGenerator/blob/master/LICENSE). This means you can modify and use it however you want, But please give this the GitHub repo a :star
+BarCodeGenerator is shared under the [MIT license](https://github.com/nchand/BarCodeGenerator/blob/master/LICENSE). This means you can modify and use it however you want, But please give this the GitHub repo a :star2:
