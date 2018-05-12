@@ -2,109 +2,107 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-    <!-- MD BOOTSTRAP -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+<!-- MD BOOTSTRAP -->
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./assets/css/main.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="./assets/css/main.css">
 
-    <title>Bar Code Generator</title>
+<title>Bar Code Generator</title>
 </head>
 
 <body>
 
 
-    <div id="error-message"></div>
-    <div id="nan-error">Sticker Quantity can't exceed 50 no's</div>
+<div id="error-message"></div>
+<div id="nan-error">Sticker Quantity can't exceed 100 no's</div>
 
 
-    <form name="inputForm" onsubmit="return false">
-        <p class="h4 text mb-4">Product Level Generator</p>
+<form name="inputForm" id="codeForm" onsubmit="return false">
+    <p class="h4 text mb-4">Product Level Generator</p>
 
-        <!-- Default input product code  -->
-        <label for="dataString" class="grey-text">Enter Your Product's Code Here
-            <span style="color: red">*</span>
-        </label>
-        <input type="text" id="dataString" name="Product Code" class="form-control" required>
-        <!-- <div class="error-message">This is an error message</div> -->
-        <br>
-
-        <!-- Default input product price  -->
-        <label for="productPrice" class="grey-text">Enter Product Price
-            <span style="color: red">*</span>
-        </label>
-        <input type="text" id="productPrice" name="Product Price" class="form-control" required>
-        <!-- <div class="error-message">This is an error message</div> -->
-        <br>
-
-        <!-- Default input no:of stickers -->
-        <label for="totallevels" class="grey-text">Number Of Stickers You Want To Print
-            <span style="color: red">*</span>
-        </label>
-        <input type="text" id="totallevels" name="Sticker Quantity" class="form-control" min="1" max="50" required>
-        <!-- <div class="error-message">This is an error message</div> -->
-
-        <div class="mt-4" id="editor">
-            <button class="btn btn-default" type="submit" id="submitData">Generate</button>
-        </div>
-    </form>
-
-    <br>
-    <br>
-    <br>
-    <div id="barcode-wrapper"></div>
-    <canvas id="hidden-barcode"></canvas>
-    <br>
-    <br>
+    <!-- Default input product code  -->
+    <label for="dataString" class="grey-text">Enter Your Product's Code Here
+        <span style="color: red">*</span>
+    </label>
+    <input type="text" id="dataString" name="Product Code" class="form-control" required >
+    <!-- <div class="error-message">This is an error message</div> -->
     <br>
 
+    <!-- Default input product price  -->
+    <label for="productPrice" class="grey-text">Enter Product Price
+        <span style="color: red">*</span>
+    </label>
+    <input type="text" id="productPrice" name="Product Price" class="form-control" required >
+    <!-- <div class="error-message">This is an error message</div> -->
+    <br>
 
-    <p id="about">
-        In case if you are wondering, what this tool does? Well, I got an answer for you. This is a tool for generating price tags(
-        <em>stickers, to be more clear</em>) with a Bar Code containing all information in it.
-        <br>
-        <strong>Too basic</strong>, ehh? No! Not really. We will modify it further. Have an eye on our
-        <a href="https://goo.gl/GD3mkb">GitHub</a> if you would like to use it for your business.
-        <br>
-        <strong>Pricing?</strong> Again a NO! It's totally free to use. However, we do care for an attribution. It really helps us
-        grow!
-    </p>
+    <!-- Default input no:of stickers -->
+    <label for="totallevels" class="grey-text">Number Of Stickers You Want To Print
+        <span style="color: red">*</span>
+    </label>
+    <input type="text" id="totallevels" name="Sticker Quantity" class="form-control" min="1" max="100" required>
+    <!-- <div class="error-message">This is an error message</div> -->
 
 
+    <div class="mt-4" id="editor">
+        <button class="btn btn-default" type="submit" id="submitData">Generate</button>
+        <button class="btn btn-default" id="createPDF">Create PDF</button>
+        <button class="btn btn-default" id="resetBarcodes">Reset</button>
+    </div>
+</form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
-    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+<br>
+<br>
+<br>
+<div id="barcode-wrapper"></div>
+<!--<canvas id="hidden-barcode"></canvas>-->
+<br>
+<br>
+<br>
 
-    
+<p id="about">
+    In case if you are wondering, what this tool does? Well, I got an answer for you. This is a tool for generating price tags(
+    <em>stickers, to be more clear</em>) with a Bar Code containing all information in it.
+    <br>
+    <strong>Too basic</strong>, ehh? No! Not really. We will modify it further. Have an eye on our
+    <a href="https://goo.gl/GD3mkb">GitHub</a> if you would like to use it for your business.
+    <br>
+    <strong>Pricing?</strong> Again a NO! It's totally free to use. However, we do care for an attribution. It really helps us
+    grow!
+</p>
 
-    <!-- BARCODE GENERATOR-->
-    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+<script src="./assets/js/html2pdf.js"></script>
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+<!-- BARCODE GENERATOR-->
+<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 
-    <!-- Custom JS-->
-    <script src="./assets/js/script.js"></script>
-    
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+
+<!-- Custom JS-->
+<script src="./assets/js/script.js"></script>
+
 
 
 
 </body>
 
 </html>
+

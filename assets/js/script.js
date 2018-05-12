@@ -1,125 +1,164 @@
-'use strict'
+"use strict";
 
-let productDataString = document.getElementById('dataString');
-let productPrice = document.getElementById('productPrice');
-let productCount = document.getElementById('totallevels');
-let submitbButton = document.getElementById('submitData');
-let wrapper = document.getElementById('barcode-wrapper');
-let wrapper1 = document.getElementById('cost');
-let hiddenBarcode = document.getElementById('hidden-barcode');
-let span = document.createElement('span');
-let img = document.createElement('img');
-let priceImgWrapper = document.createElement('div')
-img.setAttribute('class', 'barcode');
-span.setAttribute('class', 'barcodePrice');
-priceImgWrapper.setAttribute('class', 'priceImgWrapper');
-let barcodePrice = document.getElementsByClassName('barcodePrice');
-let genButton = document.getElementById('gen');
+//Predetermined DOM element variables
+let wrapper = document.getElementById("barcode-wrapper");
+let canvas = document.getElementById("hidden-barcode");
 
-const generateBarcode = () => {
-    wrapper.innerHTML = "";
-    let price = Number(productPrice.value);
-    for (let i = 0; i < productCount.value; i++) {
-        priceImgWrapper.appendChild(span);
-        priceImgWrapper.appendChild(img)
-        span = document.createElement('span');
-        wrapper.appendChild(priceImgWrapper);
-        barcodePrice[i].innerHTML = "Rs." + price.toFixed(2);
-        img = document.createElement('img');
-        priceImgWrapper = document.createElement('div')
-        img.setAttribute('class', 'barcode');
-        span.setAttribute('class', 'barcodePrice');
-        priceImgWrapper.setAttribute('class', 'priceImgWrapper');
-    }
-    JsBarcode(".barcode", productDataString.value);
-    console.log(productDataString.value)
-    console.log(productPrice.value)
+//User interaction variables
+let productDataString = document.getElementById("dataString");
+let productPrice = document.getElementById("productPrice");
+let productCount = document.getElementById("totallevels");
+let submitbButton = document.getElementById("submitData");
 
+//Dynamicly created DOM elements
+let span = document.createElement("span");
+span.setAttribute("class", "barcodePrice");
+
+let img = document.createElement("img");
+img.setAttribute("class", "barcode");
+
+let priceImgWrapper = document.createElement("div");
+priceImgWrapper.setAttribute("class", "priceImgWrapper");
+
+//Dynamic DOM element selectors
+//let barcodePrice = document.getElementsByClassName("barcodePrice");
+let genButton = document.getElementById("gen");
+let generated = false;
+
+//Function to generate a barcode barcode DOM tree virtually
+const generateBarcodes = () => {
+generated = true;
+let barcodeSet = [];
+wrapper.innerHTML = "";
+let price = Number(productPrice.value);
+span.innerHTML = "Rs." + price.toFixed(2);
+JsBarcode(img, productDataString.value);
+
+//Create the barcode DOM structure
+priceImgWrapper.appendChild(span);
+priceImgWrapper.appendChild(img);
+
+let rowCount = 0;
+let maxRows = 36;
+
+//Loop append the barcodeDOM the right amount of times to the array
+for (let i = 0; i < productCount.value; i++) {
+if (rowCount == maxRows) {
+  let pageSplit = document.createElement("div");
+  pageSplit.setAttribute("class", "html2pdf__page-break");
+  wrapper.appendChild(pageSplit);
+  rowCount = 0;
 }
 
+let newBarcode = priceImgWrapper.cloneNode(true);
+newBarcode.setAttribute("id", "barcode_" + [i]);
+barcodeSet.push(newBarcode);
 
+//Append barcode to DOM
+wrapper.appendChild(newBarcode);
+rowCount++;
+console.log(rowCount);
+}
 
-submitbButton.addEventListener('click', () => {
+return barcodeSet;
+};
 
-    let fields = ["Product Code", "Product Price", "Sticker Quantity"]
-    let i, l = fields.length;
-    let fieldname;
-    let x = document.forms["inputForm"]["Product Price"].value;
-    let y = document.forms["inputForm"]["Sticker Quantity"].value;
+//Function to create PDF File
 
-    for (i = 0; i < l; i++) {
-        fieldname = fields[i];
-        if (document.forms["inputForm"][fieldname].value === "") {
-            document.getElementById('error-message').innerHTML = fieldname + " can not be empty";
-            document.getElementById('error-message').style.display = "block";
+const generatePDF = (elementToPdf, position) => {
+let theMargin;
+switch (position) {
+  case "left":
+    theMargin = [15, 15, 15, 15];
+    break;
+  case "center":
+    theMargin = [15, 70, 15, 70];
+    break;
+  case "right":
+    theMargin = [15, 125, 15, 15];
+    break;
+}
+var element = document.getElementById(elementToPdf);
+html2pdf(element, {
+  margin: theMargin,
+  filename: "barcodes.pdf",
+  jsPDF: { unit: "pt", orientation: "portrait", format: "a4" }
+});
+};
 
-        setTimeout(() => {
-            document.getElementById('error-message').style.display = "none";
-        }, 3000);
+//Function to generate Barcode
+submitbButton.addEventListener("click", () => {
+let fields = ["Product Code", "Product Price", "Sticker Quantity"];
+let i,
+l = fields.length;
+let fieldname;
+let x = document.forms["inputForm"]["Product Price"].value;
+let y = document.forms["inputForm"]["Sticker Quantity"].value;
 
-            return false;
-        }
+let errorField = document.getElementById("error-message");
+let nanError = document.getElementById("nan-error");
 
-    }
-    if (isNaN(x)) {
-        document.getElementById('error-message').innerHTML = "Product Price must be a number";
-        document.getElementById('error-message').style.display = "block";
-        setTimeout(() => {
-            document.getElementById('error-message').style.display = "none";
-        }, 3000);
-        return false;
-    }
-    if (isNaN(y)) {
-        document.getElementById('error-message').innerHTML = "Sticker Quantity must be a number";
-        document.getElementById('error-message').style.display = "block";
-        setTimeout(() => {
-            document.getElementById('error-message').style.display = "none";
-        }, 3000);
-        return false;
-    }
-    if (document.forms["inputForm"]["Sticker Quantity"].value > 50) {
-        document.getElementById('nan-error').style.display = "block";
+for (i = 0; i < l; i++) {
+fieldname = fields[i];
+if (document.forms["inputForm"][fieldname].value === "") {
+  errorField.innerHTML = fieldname + " can not be empty";
+  errorField.style.display = "block";
 
-        setTimeout(() => {
-            document.getElementById('nan-error').style.display = "none";
-        }, 6000);
+  setTimeout(() => {
+    errorField.style.display = "none";
+  }, 3000);
 
-    } else {
-        generateBarcode();
-        
-        //URL METHOD ..
-    //     var imgData = document.getElementsByClassName("barcode-wrapper");
-    //     console.log(imgData);
-    //     var doc = new jsPDF()
-    //     doc.setFontSize(40)
-    //     doc.addImage(imgData, 'JPEG', 15, 40, 180, 160)
-    //    doc.save('test.pdf')
-    
-        //JsPdf Method..
-    var pdf = new jsPDF("p", "pt", "a4");
-	pdf.addHTML($('#barcode-wrapper'), 15, 15, function() {
-        pdf.setTextColor(0, 255, 0);
-	  pdf.save('div.pdf');
-    });
-    
+  return false;
+}
+}
+if (isNaN(x)) {
+errorField.innerHTML = "Product Price must be a number";
+errorField.style.display = "block";
+setTimeout(() => {
+  errorField.style.display = "none";
+}, 3000);
+return false;
+}
+if (isNaN(y)) {
+errorField.innerHTML = "Sticker Quantity must be a number";
+errorField.style.display = "block";
+setTimeout(() => {
+  errorField.style.display = "none";
+}, 3000);
+return false;
+}
+if (document.forms["inputForm"]["Sticker Quantity"].value > 100) {
+nanError.style.display = "block";
 
-        //JQuery Method..
-    // $("#submitData").on("click", function () {
-    //     var divContents = $("#barcode-wrapper").html();
-    //     var printWindow = window.open('', '', 'height=400,width=800');
-    //     printWindow.document.write('<html><head><title>DIV Contents</title>');
-    //     printWindow.document.write('</head><body >');
-    //     printWindow.document.write(divContents);
-    //     printWindow.document.write('</body></html>');
-    //     printWindow.document.close();
-    //     printWindow.print();
-    // });
+setTimeout(() => {
+  nanError.style.display = "none";
+}, 6000);
+} else {
+let barcodes = generateBarcodes();
+console.log(barcodes);
+}
+createPDF.addEventListener("click", () => { 
+if(generated==true) {
+generatePDF("barcode-wrapper", "center");
 
-    }
-    
-})
+}
+else {
+errorField.innerHTML = "Generate Sticker to create PDF";
+errorField.style.display = "block";
 
+setTimeout(() => {
+  errorField.style.display = "none";
+}, 6000);
 
+return false;
+}
+wrapper.innerHTML = "";
+generated = false;
+});
 
-
+resetBarcodes.addEventListener("click", () => {
+wrapper.innerHTML = "";
+document.getElementById("codeForm").reset();
+});
+});
 
