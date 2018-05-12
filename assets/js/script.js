@@ -1,10 +1,7 @@
 "use strict";
 
-//Predetermined DOM element variables
 let wrapper = document.getElementById("barcode-wrapper");
 let canvas = document.getElementById("hidden-barcode");
-
-//User interaction variables
 let productDataString = document.getElementById("dataString");
 let productPrice = document.getElementById("productPrice");
 let productCount = document.getElementById("totallevels");
@@ -13,15 +10,12 @@ let submitbButton = document.getElementById("submitData");
 //Dynamicly created DOM elements
 let span = document.createElement("span");
 span.setAttribute("class", "barcodePrice");
-
 let img = document.createElement("img");
 img.setAttribute("class", "barcode");
-
 let priceImgWrapper = document.createElement("div");
 priceImgWrapper.setAttribute("class", "priceImgWrapper");
 
 //Dynamic DOM element selectors
-//let barcodePrice = document.getElementsByClassName("barcodePrice");
 let genButton = document.getElementById("gen");
 let generated = false;
 
