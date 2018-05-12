@@ -5,7 +5,7 @@
 </p>
 
 ## Introduction 
-**BarCodeGenerator** is a barcode generator or a tool for generating **price tags**( stickers, to be more clear) with a Bar Code containing all information in it. written in JavaScript. It supports multiple barcode formats and works in browsers.
+**BarCodeGenerator** is a tool for generating **price tags**( stickers, to be more clear) with a Bar Code containing all information in it. Written in JavaScript. It supports multiple barcode formats and works in browsers.
 
 ## Demo
 [Bar Code Generator](https://nchand.github.io/BarCodeGenerator/)
