@@ -14,13 +14,14 @@ form {
     /* flex-direction: column; */
     text-align: center;
 }
-.barcode {
+/* .barcode {
     width: 200px;
     height: 60px;
-}
+} */
 .priceImgWrapper {
     display: flex;
     flex-direction: column;
+    /* font-size: 20px; */
 }
 #error-message, #nan-error {
     display: none;
@@ -32,4 +33,22 @@ form {
     border-radius: 5px;
     color: red;
     background: rgba(236, 114, 114, 0.288);
+}
+
+.barcode{
+    width: 150px;
+    height: 80px;
+    filter: none;
+    /* image-rendering: auto; */
+}
+
+span.barcodePrice
+{
+font-family: sans-serif;
+Font-size:18px;
+font-weight: bold;
+/* padding-bottom: 0px; */
+margin-bottom: -8px;
+z-index: 10;
+/* padding-top: 0% */
 }

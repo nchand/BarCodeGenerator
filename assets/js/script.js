@@ -15,6 +15,7 @@ img.setAttribute("class", "barcode");
 let priceImgWrapper = document.createElement("div");
 priceImgWrapper.setAttribute("class", "priceImgWrapper");
 
+
 //Dynamic DOM element selectors
 let genButton = document.getElementById("gen");
 let generated = false;
@@ -26,14 +27,17 @@ let barcodeSet = [];
 wrapper.innerHTML = "";
 let price = Number(productPrice.value);
 span.innerHTML = "Rs." + price.toFixed(2);
-JsBarcode(img, productDataString.value);
+JsBarcode(img, productDataString.value,
+  { font: "sans-serif", margin: 20,textMargin: 10,fontOptions: "bold",
+    textAlign: "center",fontSize:35
+  });
 
 //Create the barcode DOM structure
 priceImgWrapper.appendChild(span);
 priceImgWrapper.appendChild(img);
 
 let rowCount = 0;
-let maxRows = 36;
+let maxRows = 40;
 
 //Loop append the barcodeDOM the right amount of times to the array
 for (let i = 0; i < productCount.value; i++) {
@@ -131,6 +135,7 @@ setTimeout(() => {
 let barcodes = generateBarcodes();
 console.log(barcodes);
 }
+
 createPDF.addEventListener("click", () => { 
 if(generated==true) {
 generatePDF("barcode-wrapper", "center");
