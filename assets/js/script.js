@@ -28,7 +28,7 @@ wrapper.innerHTML = "";
 let price = Number(productPrice.value);
 span.innerHTML = "Rs." + price.toFixed(2);
 JsBarcode(img, productDataString.value,
-  { font: "sans-serif", margin: 20,textMargin: 10,fontOptions: "bold",
+  { font: "sans-serif", margin: 20,textMargin: 5,fontOptions: "bold",
     textAlign: "center",fontSize:35
   });
 
@@ -36,16 +36,20 @@ JsBarcode(img, productDataString.value,
 priceImgWrapper.appendChild(span);
 priceImgWrapper.appendChild(img);
 
-let rowCount = 0;
-let maxRows = 40;
+let eleCount = 0; // one row can have 5 label, but this count the number of element, change name as the eleCount From rowCount
+// A4 height = 297mm top margin 12mm bottom margin 12mm label height 21mm
+// the max number of row of labels = 273 / 21 = 13
+let maxRows = 13; 
+
 
 //Loop append the barcodeDOM the right amount of times to the array
 for (let i = 0; i < productCount.value; i++) {
-if (rowCount == maxRows) {
+
+if (eleCount/5 > maxRows) { // if eleCout is greater than maxRows, it needs new page, so it inserts page break
   let pageSplit = document.createElement("div");
   pageSplit.setAttribute("class", "html2pdf__page-break");
   wrapper.appendChild(pageSplit);
-  rowCount = 0;
+  eleCount = 0;
 }
 
 let newBarcode = priceImgWrapper.cloneNode(true);
@@ -54,8 +58,8 @@ barcodeSet.push(newBarcode);
 
 //Append barcode to DOM
 wrapper.appendChild(newBarcode);
-rowCount++;
-console.log(rowCount);
+eleCount++;
+console.log(eleCount);
 }
 
 return barcodeSet;
@@ -70,7 +74,7 @@ switch (position) {
     theMargin = [15, 15, 15, 15];
     break;
   case "center":
-    theMargin = [15, 70, 15, 70];
+    theMargin = [12, 5, 0, 5]; // change margin to fit a4 format
     break;
   case "right":
     theMargin = [15, 125, 15, 15];
@@ -80,7 +84,7 @@ var element = document.getElementById(elementToPdf);
 html2pdf(element, {
   margin: theMargin,
   filename: "barcodes.pdf",
-  jsPDF: { unit: "pt", orientation: "portrait", format: "a4" }
+  jsPDF: { unit: "mm", orientation: "portrait", format: "a4" } // change unit to mm
 });
 };
 
